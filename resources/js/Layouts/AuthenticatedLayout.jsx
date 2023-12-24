@@ -47,7 +47,7 @@ export default function Authenticated({ user, header, children, member=null, pro
                 <div className='flex flex-col flex-1 '>
                     {/* HEADER */}
                     <div className='flex flex-row justify-between p-2'>
-                        <p className='font-bold my-auto text-2xl'>{header}</p>
+                        <p className='font-bold bg-red-200 my-auto text-2xl'>{header}</p>
 
                         {member && (
                             <div className='flex gap-3 min-h-min'>

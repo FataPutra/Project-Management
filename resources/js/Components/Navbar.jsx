@@ -20,7 +20,7 @@ export default function Navbar({user})
         },
     ]
   return (
-    <div className="navbar bg-blue-600 border-b-2 border-blue-600">
+    <div className="navbar bg-blue-950 border-b-2 border-blue-950">
         <div className="flex lg:flex-none items-center">
             <div className="drawer md:hidden">
                 <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -50,7 +50,7 @@ export default function Navbar({user})
                             <label>+</label>
                         </button>
                         <dialog id="my_modal_3" className="modal">
-                            <div className="modal-box flex flex-col justify-center">
+                            <div className="modal-box flex flex-col justify-center ">
                                 <h3 className="font-bold text-lg pb-4 m-auto">Tambah Project</h3>
 
                                 <form onSubmit={submit} className="flex flex-col">

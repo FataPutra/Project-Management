@@ -45,11 +45,11 @@ export default function SideBar({user})
     }, [projects])
     // END LIST PROJECTS==========================
   return (
-    <Sidebar className="hidden md:block">
+    <Sidebar className="hidden md:block bg-zinc-400 h-screen">
         {/* Button Add Project */}
         <div>
             {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <button className="flex justify-center gap-3 py-2 w-full text-2xl font-bold text-white bg-blue-600 hover:bg-blue-700" onClick={()=>document.getElementById('my_modal_2').showModal()}>
+            <button className="flex justify-center gap-3 py-2 w-full text-2xl font-bold text-black bg-zinc-400 hover:bg-zinc-300" onClick={()=>document.getElementById('my_modal_2').showModal()}>
                 <label>Project</label>
                 <label>+</label>
             </button>
@@ -82,8 +82,8 @@ export default function SideBar({user})
                 )} */}
                 {projects?.map((project, index) => {
                     return(
-                        <div className="flex justify-between pe-4">
-                            <Link href={route("project.detail", project.project_id)} className="flex-1 ">
+                        <div className="flex justify-between pe-4 bg-zinc-200">
+                            <Link href={route("project.detail", project.project_id)} className="flex-1 bg-zinc-200">
                                 <MenuItem key={index}>
                                     {project.name_project}
                                 </MenuItem>

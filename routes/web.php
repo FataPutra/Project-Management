@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/testing', [TestingController::class, 'index']);
 
-Route::prefix('project')->group(function(){
+Route::prefix('project')->group(function () {
 
     Route::get('/testing', [ProjectController::class, 'testing'])->name('project.testing');
 
@@ -54,22 +54,22 @@ Route::prefix('project')->group(function(){
 
     Route::delete('/delete/{id}', [ProjectController::class, 'deleteProject'])->name('project.deleteProject');
 
-    Route::prefix('member')->group(function(){
+    Route::prefix('member')->group(function () {
         Route::post('/addMember', [ProjectController::class, 'addMember'])->name('project.member.addMember');
 
         Route::post('/deleteMember', [ProjectController::class, 'deleteMember'])->name('project.member.delete');
-
     });
 
-    Route::prefix('Card')->group(function() {
+    Route::prefix('member')->group(function () {
+        Route::post('/addMember', [ProjectController::class, 'addMember'])->name('project.member.addMember');
+
+        Route::post('/deleteMember', [ProjectController::class, 'deleteMember'])->name('project.member.delete');
+    });
+
+    Route::prefix('Card')->group(function () {
 
         Route::post('/store', [CardController::class, 'createCard'])->name('project.card.createCard');
-
-        Route::delete('/delete/{id}', [CardController::class, 'deleteCard'])->name('project.card.delete');
-
-        Route::post('/decrypt', [CardController::class, 'decrypt'])->name('project.card.decrypt');
-
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
