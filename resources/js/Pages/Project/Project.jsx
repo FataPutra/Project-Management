@@ -32,7 +32,7 @@ export default function Project({ auth, project, card, member, jobs }) {
         >
             <Head title={`Project `+detailProject.name_project} />
 
-            <div className='p-3 flex flex-col gap-2 bg-orange-50 h-full'>
+            <div className='p-3 flex flex-col gap-2 bg-orange-50 overflow-hidden'>
                 {/*  */}
                 <button className="btn w-36 bg-gray-400 text-white" onClick={()=>document.getElementById('my_modal_card').showModal()}>Add Card</button>
                 <dialog id="my_modal_card" className="modal">
