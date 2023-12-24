@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\Project;
+use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Inertia\Inertia;
 
 class ProjectController extends Controller
@@ -23,12 +26,16 @@ class ProjectController extends Controller
     {
         // return Project::findOrFail($id);
         $project = Project::findOrFail($id);
-        // return $project->cards()->get();
-        // return response()->json($p);
 
-        return Inertia::render('Project/Project',[
+        $cards = $project->cards()->with('job')->get();
+
+        $cards->each(function ($card) {
+            $card->title = Crypt::decryptString($card->title);
+        });
+
+        return Inertia::render('Project/Project', [
             'project' => $project,
-            'card' => $project->cards()->get(),
+            'card' => $cards,
             'member' => $project->users()->get(),
             'jobs' => Job::all()->except([1]),
         ]);
@@ -72,6 +79,37 @@ class ProjectController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+
+    }
+
+    public function addMember(Request $request)
+    {
+        try {
+            $request->validate([
+                'project_id' => 'required',
+                'email' => 'required|email',
+                'job' => 'required',
+            ]);
+
+            $user = User::where('email', $request->email)->firstOrFail();
+
+            Project::findOrFail($request->project_id)->users()->attach($user->id,[
+                'job_id' => $request->job,
+            ]);
+
+            return response()->json('berhasil menambahkan email : '. $request->email);
+
+        } catch (Exception $e) {
+            return response()->json($e->getMessage());
+        }
+    }
+
+    public function deleteMember(Request $request)
+    {
+        $project = Project::findOrFail($request->project);
+        $project = $project->users()->detach($request->member['id']);
+
+        return response()->json('berhasil menghapus '. $request->member['name']);
 
     }
 }

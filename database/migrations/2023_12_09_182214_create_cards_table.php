@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id('card_id');
             $table->foreignId('project_id')->constrained('projects', 'project_id');
             $table->foreignId('job_id')->constrained('jobs', 'job_id');
-            $table->string('title');
+            $table->text('title');
             $table->text('description');
-            $table->string('image')->nullable();
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

@@ -50,9 +50,15 @@ Route::prefix('project')->group(function () {
 
     Route::get('/detailProject/{id}', [ProjectController::class, 'detailProject'])->name('project.detail');
 
-    Route::post('/project', [ProjectController::class, 'createProject'])->name('project.createProject');
+    Route::post('/store', [ProjectController::class, 'createProject'])->name('project.createProject');
 
     Route::delete('/delete/{id}', [ProjectController::class, 'deleteProject'])->name('project.deleteProject');
+
+    Route::prefix('member')->group(function () {
+        Route::post('/addMember', [ProjectController::class, 'addMember'])->name('project.member.addMember');
+
+        Route::post('/deleteMember', [ProjectController::class, 'deleteMember'])->name('project.member.delete');
+    });
 
     Route::prefix('member')->group(function () {
         Route::post('/addMember', [ProjectController::class, 'addMember'])->name('project.member.addMember');
@@ -63,10 +69,6 @@ Route::prefix('project')->group(function () {
     Route::prefix('Card')->group(function () {
 
         Route::post('/store', [CardController::class, 'createCard'])->name('project.card.createCard');
-
-        Route::delete('/delete/{id}', [CardController::class, 'deleteCard'])->name('project.card.delete');
-
-        Route::post('/decrypt', [CardController::class, 'decrypt'])->name('project.card.decrypt');
     });
 });
 

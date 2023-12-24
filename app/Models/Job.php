@@ -31,4 +31,9 @@ class Job extends Model
     protected $fillable = [
         'name_job'
     ];
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class, 'job_id');
+    }
 }

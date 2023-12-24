@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 
 class CardSeeder extends Seeder
@@ -38,8 +39,8 @@ class CardSeeder extends Seeder
             DB::table('cards')->insert([
                 'project_id' => $projects[$i],
                 'job_id' => $jobs[$i],
-                'title' => $title[$i],
-                'description' => $description[$i],
+                'title' => Crypt::encryptString($title[$i]),
+                'description' => Crypt::encryptString($description[$i]),
                 'image' => null,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),

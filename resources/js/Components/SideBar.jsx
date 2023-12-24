@@ -25,27 +25,12 @@ export default function SideBar({user})
     const handleDelete = async (id) => {
         try {
             const response = await axios.delete(route('project.deleteProject', id));
-            console.log(response.data);
-            console.log('berhasil dihapus');
-
             // Perbarui state projects setelah penghapusan
             setProjects(projects.filter(project => project.project_id !== id));
         } catch (error) {
-            console.log('pesan eror : ');
             console.error(error);
         }
     }
-    // const handleDelete = (id) => {
-    //     console.log(id)
-    //     axios.delete(route('project.deleteProject', id))
-    //         .then(res => {
-    //             console.log(res)
-    //             console.log('berhasil dihapus')
-    //         }).catch(res => {
-    //             console.log('pesan eror : ')
-    //             console.log(res)
-    //         })
-    // }
     // End Button Delete
 
     // LIST PROJECTS==============================
@@ -57,7 +42,7 @@ export default function SideBar({user})
                 // console.log(res.data.projects)
                 setProjects(res.data.projects)
             })
-    }, [])
+    }, [projects])
     // END LIST PROJECTS==========================
   return (
     <Sidebar className="hidden md:block bg-zinc-400 h-screen">
@@ -104,8 +89,8 @@ export default function SideBar({user})
                                 </MenuItem>
                             </Link>
                             <button className="bg-red-500 hover:bg-red-600 rounded-lg p-2 m-auto self-end" onClick={() => handleDelete(project.project_id)}>
-                                <svg className="w-[20px] h-[20px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
+                                <svg class="w-5 h-5 text-white " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 20">
+                                    <path d="M17 4h-4V2a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v2H1a1 1 0 0 0 0 2h1v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6h1a1 1 0 1 0 0-2ZM7 2h4v2H7V2Zm1 14a1 1 0 1 1-2 0V8a1 1 0 0 1 2 0v8Zm4 0a1 1 0 0 1-2 0V8a1 1 0 0 1 2 0v8Z"/>
                                 </svg>
                             </button>
                         </div>
